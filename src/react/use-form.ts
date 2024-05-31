@@ -8,16 +8,18 @@ export default function useForm<T extends Record<string, any> = never>(
 	const [form] = useState(() => createForm(options));
 	const formState = useSyncExternalStore(form.subscribe, form.getState);
 
-	const textProps = (name: keyof T) => {
+	const textProps = (
+		name: keyof T & string,
+	): Partial<React.JSX.IntrinsicElements['input']> => {
 		const { onClick, onFocus, onChange } = form.createListeners(name);
 
 		return {
 			name,
-			ref: createRef<HTMLInputElement>(),
+			ref: createRef(),
 			defaultValue: form.getRawValue(name),
 			onClick,
 			onFocus,
-			onChange: (event: React.ChangeEvent<HTMLInputElement>) => {
+			onChange: (event) => {
 				onChange(event.target.value);
 			},
 		};
