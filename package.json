@@ -22,8 +22,8 @@
 	},
 	"scripts": {
 		"example": "vite",
-		"test": "vitest",
-		"test:coverage": "vitest run --coverage",
+		"test": "vitest --passWithNoTests",
+		"test:coverage": "vitest run --coverage --passWithNoTests",
 		"lint": "concurrently -n eslint,tsc -c magenta,green \"eslint ./\" \"tsc\"",
 		"format": "prettier --write ./",
 		"format:check": "prettier --check ./",
