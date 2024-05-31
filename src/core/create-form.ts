@@ -1,3 +1,4 @@
+import { createFormDependencies } from './create-form-dependencies';
 import { createFormState } from './create-form-state';
 
 type FieldsToValidators<T extends Record<string, any>> = {
@@ -14,20 +15,29 @@ export default function createForm<T extends Record<string, any> = never>({
 	onSubmit,
 }: FormOptions<T>) {
 	const formState = createFormState<T>();
+	const dependencies = createFormDependencies<T>();
 
 	const rawValues: Partial<Record<keyof T, string>> = {};
 	const validatedValues: Partial<T> = {};
 
 	const defaultValidator = (value: string) => value;
 
-	const validate = (field: keyof T) => {
+	const validate = (
+		field: keyof T,
+		options: { withDeps: boolean } = { withDeps: true },
+	) => {
 		const validator = validators[field] ?? defaultValidator;
 		const value = rawValues[field] ?? '';
 
 		let validated: unknown;
 
 		try {
-			validated = validator(value, validatedValues);
+			const proxifiedValues = dependencies.proxify(field, {
+				...rawValues,
+				...validatedValues,
+			});
+
+			validated = validator(value, proxifiedValues);
 
 			formState.removeError(field);
 		} catch (error: unknown) {
@@ -46,6 +56,12 @@ export default function createForm<T extends Record<string, any> = never>({
 
 		if (validated !== undefined) {
 			validatedValues[field] = validated as T[keyof T];
+		}
+
+		if (options.withDeps) {
+			dependencies.get(field).forEach((dependentField) => {
+				validate(dependentField);
+			});
 		}
 	};
 
@@ -71,7 +87,9 @@ export default function createForm<T extends Record<string, any> = never>({
 
 	const submit = () => {
 		Object.keys(validators).forEach((field) => {
-			validate(field);
+			validate(field, {
+				withDeps: false,
+			});
 		});
 
 		if (!formState.get().isValid) {
