@@ -1,8 +1,8 @@
 import { createRef, useState, useSyncExternalStore } from 'react';
-import createForm from '../core/create-form';
+import { createForm } from '../core/create-form';
 import type { FormOptions } from '../core/create-form';
 
-export default function useForm<T extends Record<string, any> = never>(
+export function useForm<T extends Record<string, any> = never>(
 	options: FormOptions<T>,
 ) {
 	const [form] = useState(() => createForm(options));

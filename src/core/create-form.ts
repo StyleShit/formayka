@@ -13,7 +13,7 @@ export type FormOptions<T extends Record<string, any>> = {
 	onSubmit: (args: { values: T }) => void;
 };
 
-export default function createForm<T extends Record<string, any> = never>({
+export function createForm<T extends Record<string, any> = never>({
 	defaultValues = {},
 	validators,
 	onSubmit,
