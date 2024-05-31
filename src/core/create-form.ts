@@ -1,8 +1,10 @@
 import { createFormDependencies } from './create-form-dependencies';
 import { createFormState } from './create-form-state';
 
+type FieldValue = string | boolean;
+
 type FieldsToValidators<T extends Record<string, any>> = {
-	[K in keyof T]?: (value: string, formData: Partial<Omit<T, K>>) => T[K];
+	[K in keyof T]?: (value: FieldValue, formData: Partial<Omit<T, K>>) => T[K];
 };
 
 export type FormOptions<T extends Record<string, any>> = {
@@ -19,10 +21,10 @@ export default function createForm<T extends Record<string, any> = never>({
 	const formState = createFormState<T>();
 	const dependencies = createFormDependencies<T>();
 
-	const rawValues: Partial<Record<keyof T, string>> = defaultValues;
+	const rawValues: Partial<Record<keyof T, FieldValue>> = defaultValues;
 	const validatedValues: Partial<T> = {};
 
-	const defaultValidator = (value: string) => value;
+	const defaultValidator = (value: FieldValue) => value;
 
 	const getRawValue = (field: keyof T) => rawValues[field] ?? '';
 
@@ -31,7 +33,7 @@ export default function createForm<T extends Record<string, any> = never>({
 		options: { withDeps: boolean } = { withDeps: true },
 	) => {
 		const validator = validators[field] ?? defaultValidator;
-		const value = rawValues[field] ?? '';
+		const value = rawValues[field];
 
 		let validated: unknown;
 
@@ -41,7 +43,7 @@ export default function createForm<T extends Record<string, any> = never>({
 				...validatedValues,
 			});
 
-			validated = validator(value, proxifiedValues);
+			validated = validator(value as FieldValue, proxifiedValues);
 
 			formState.removeError(field);
 		} catch (error: unknown) {

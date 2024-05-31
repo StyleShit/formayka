@@ -1,11 +1,12 @@
 import useForm from '../src/react/use-form';
 
 function App() {
-	const { textProps, formState, submit } = useForm<{
+	const { textProps, checkboxProps, formState, submit } = useForm<{
 		name: string;
 		email: string;
 		password: string;
 		passwordConfirm: string;
+		keepSignedIn: boolean;
 	}>({
 		defaultValues: {
 			name: 'John Doe',
@@ -23,13 +24,19 @@ function App() {
 				return value;
 			},
 
-			email: (value) => {
+			email: (value, values) => {
 				if (typeof value !== 'string') {
 					throw new Error('Email must be a string');
 				}
 
 				if (!value.includes('@')) {
 					throw new Error('Email must include @');
+				}
+
+				if (values.keepSignedIn === true && !value.includes('.')) {
+					throw new Error(
+						'Email must include . if keepSignedIn is true',
+					);
 				}
 
 				return value;
@@ -109,6 +116,13 @@ function App() {
 			{formState.errors.passwordConfirm && (
 				<>{formState.errors.passwordConfirm}</>
 			)}
+			<br />
+			<input
+				type="checkbox"
+				{...checkboxProps('keepSignedIn')}
+				id="keepSignedIn"
+			/>
+			<label htmlFor="keepSignedIn">Keep me signed in</label>
 			<br />
 			<br />
 			<button type="submit" disabled={!formState.isValid}>
