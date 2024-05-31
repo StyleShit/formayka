@@ -1,5 +1,0 @@
----
-"formayka": patch
----
-
-Initial release
