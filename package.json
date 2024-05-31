@@ -1,6 +1,6 @@
 {
 	"name": "formayka",
-	"description": "A framework-agnostic forms library with elegant API and performance in mind",
+	"description": "A React forms library with elegant API and performance in mind",
 	"version": "0.0.0",
 	"author": "StyleShit",
 	"license": "MIT",
