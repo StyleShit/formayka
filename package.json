@@ -1,12 +1,12 @@
 {
-	"name": "create-typescript-package",
-	"description": "A template project for creating TypeScript packages",
+	"name": "formayka",
+	"description": "A framework-agnostic forms library with elegant API and performance in mind",
 	"version": "0.0.0",
 	"author": "StyleShit",
 	"license": "MIT",
 	"repository": {
 		"type": "git",
-		"url": "https://github.com/StyleShit/create-typescript-package"
+		"url": "https://github.com/StyleShit/formayka"
 	},
 	"type": "module",
 	"main": "dist/index.js",
