@@ -14,6 +14,7 @@ export default function useForm<T extends Record<string, any> = never>(
 		return {
 			name,
 			ref: createRef<HTMLInputElement>(),
+			defaultValue: form.getRawValue(name),
 			onClick,
 			onFocus,
 			onChange: (event: React.ChangeEvent<HTMLInputElement>) => {

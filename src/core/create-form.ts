@@ -6,21 +6,25 @@ type FieldsToValidators<T extends Record<string, any>> = {
 };
 
 export type FormOptions<T extends Record<string, any>> = {
+	defaultValues?: Partial<T>;
 	validators: FieldsToValidators<T>;
 	onSubmit: (args: { values: T }) => void;
 };
 
 export default function createForm<T extends Record<string, any> = never>({
+	defaultValues = {},
 	validators,
 	onSubmit,
 }: FormOptions<T>) {
 	const formState = createFormState<T>();
 	const dependencies = createFormDependencies<T>();
 
-	const rawValues: Partial<Record<keyof T, string>> = {};
+	const rawValues: Partial<Record<keyof T, string>> = defaultValues;
 	const validatedValues: Partial<T> = {};
 
 	const defaultValidator = (value: string) => value;
+
+	const getRawValue = (field: keyof T) => rawValues[field] ?? '';
 
 	const validate = (
 		field: keyof T,
@@ -102,6 +106,7 @@ export default function createForm<T extends Record<string, any> = never>({
 	return {
 		getState: formState.get,
 		subscribe: formState.subscribe,
+		getRawValue,
 		createListeners,
 		submit,
 	};

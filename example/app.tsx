@@ -7,6 +7,9 @@ function App() {
 		password: string;
 		passwordConfirm: string;
 	}>({
+		defaultValues: {
+			name: 'John Doe',
+		},
 		validators: {
 			name: (value) => {
 				if (typeof value !== 'string') {
