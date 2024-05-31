@@ -79,6 +79,8 @@ function App() {
 		>
 			Touched: {Object.keys(formState.touched).join(', ') || 'none'}
 			<br />
+			Dirty: {Object.keys(formState.dirty).join(', ') || 'none'}
+			<br />
 			<br />
 			<input type="text" placeholder="Name" {...textProps('name')} />
 			{formState.errors.name && <>{formState.errors.name}</>}

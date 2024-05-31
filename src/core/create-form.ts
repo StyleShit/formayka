@@ -60,7 +60,7 @@ export default function createForm<T extends Record<string, any> = never>({
 			},
 
 			onChange: (value: unknown) => {
-				formState.setTouched(field);
+				formState.setDirty(field);
 
 				rawValues[field] = value as T[keyof T];
 

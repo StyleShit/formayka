@@ -2,6 +2,7 @@ type FormState<T extends Record<string, any>> = {
 	isValid: boolean;
 	errors: Partial<Record<keyof T, string>>;
 	touched: Partial<Record<keyof T, boolean>>;
+	dirty: Partial<Record<keyof T, boolean>>;
 };
 
 export function createFormState<T extends Record<string, any>>() {
@@ -9,6 +10,7 @@ export function createFormState<T extends Record<string, any>>() {
 		isValid: true,
 		errors: {},
 		touched: {},
+		dirty: {},
 	};
 
 	const getState = () => {
@@ -53,6 +55,24 @@ export function createFormState<T extends Record<string, any>>() {
 		}));
 	};
 
+	const setDirty = (field: keyof T) => {
+		if (getState().dirty[field]) {
+			return;
+		}
+
+		setState((prev) => ({
+			...prev,
+			dirty: {
+				...prev.dirty,
+				[field]: true,
+			},
+			touched: {
+				...prev.touched,
+				[field]: true,
+			},
+		}));
+	};
+
 	const setError = (field: keyof T, message: string) => {
 		if (getState().errors[field] === message) {
 			return;
@@ -90,6 +110,7 @@ export function createFormState<T extends Record<string, any>>() {
 		get: getState,
 		subscribe,
 		setTouched,
+		setDirty,
 		setError,
 		removeError,
 	};
