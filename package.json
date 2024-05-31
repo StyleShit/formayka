@@ -1,7 +1,7 @@
 {
 	"name": "formayka",
 	"description": "A React forms library with elegant API and performance in mind",
-	"version": "0.0.0",
+	"version": "0.0.1",
 	"author": "StyleShit",
 	"license": "MIT",
 	"repository": {
