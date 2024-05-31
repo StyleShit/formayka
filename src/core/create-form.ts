@@ -51,7 +51,17 @@ export default function createForm<T extends Record<string, any> = never>({
 
 	const createListeners = (field: keyof T) => {
 		return {
+			onClick: () => {
+				formState.setTouched(field);
+			},
+
+			onFocus: () => {
+				formState.setTouched(field);
+			},
+
 			onChange: (value: unknown) => {
+				formState.setTouched(field);
+
 				rawValues[field] = value as T[keyof T];
 
 				validate(field);

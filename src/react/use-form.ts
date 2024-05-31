@@ -9,11 +9,13 @@ export default function useForm<T extends Record<string, any> = never>(
 	const formState = useSyncExternalStore(form.subscribe, form.getState);
 
 	const textProps = (name: keyof T) => {
-		const { onChange } = form.createListeners(name);
+		const { onClick, onFocus, onChange } = form.createListeners(name);
 
 		return {
 			name,
 			ref: createRef<HTMLInputElement>(),
+			onClick,
+			onFocus,
 			onChange: (event: React.ChangeEvent<HTMLInputElement>) => {
 				onChange(event.target.value);
 			},

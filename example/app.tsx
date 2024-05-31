@@ -77,6 +77,9 @@ function App() {
 				submit();
 			}}
 		>
+			Touched: {Object.keys(formState.touched).join(', ') || 'none'}
+			<br />
+			<br />
 			<input type="text" placeholder="Name" {...textProps('name')} />
 			{formState.errors.name && <>{formState.errors.name}</>}
 			<br />
