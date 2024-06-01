@@ -55,6 +55,7 @@
 		"eslint": "^8.57.0",
 		"globals": "^15.1.0",
 		"prettier": "^3.2.5",
+		"react-dom": "^18.3.1",
 		"tsup": "^8.0.2",
 		"typescript": "^5.4.5",
 		"typescript-eslint": "^7.8.0",
@@ -62,7 +63,11 @@
 		"vitest": "^1.5.2"
 	},
 	"peerDependencies": {
-		"react": "^18.x",
-		"react-dom": "^18.x"
+		"react": "^18.x"
+	},
+	"peerDependenciesMeta": {
+		"react": {
+			"optional": true
+		}
 	}
 }
