@@ -1,6 +1,11 @@
 {
 	"name": "formayka",
 	"description": "A framework-agnostic forms library with elegant API, type-safety, and performance in mind",
+	"keywords": [
+		"form",
+		"input",
+		"validation"
+	],
 	"version": "0.0.1",
 	"author": "StyleShit",
 	"license": "MIT",
