@@ -1,4 +1,4 @@
-import { useForm } from '../src/react/use-form';
+import { useForm } from '../src';
 
 function App() {
 	const { textProps, checkboxProps, formState, submit } = useForm<{
