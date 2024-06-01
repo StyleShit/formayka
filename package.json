@@ -30,6 +30,10 @@
 		},
 		"./package.json": "./package.json"
 	},
+	"files": [
+		"/dist",
+		"/src"
+	],
 	"scripts": {
 		"example": "vite",
 		"test": "vitest --passWithNoTests",
