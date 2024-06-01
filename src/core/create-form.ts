@@ -9,13 +9,13 @@ type FieldsToValidators<T extends Record<string, any>> = {
 
 export type FormOptions<T extends Record<string, any>> = {
 	defaultValues?: Partial<T>;
-	validators: FieldsToValidators<T>;
-	onSubmit: (args: { values: T }) => void;
+	validators?: FieldsToValidators<T>;
+	onSubmit?: (args: { values: T }) => void;
 };
 
 export function createForm<T extends Record<string, any> = never>({
 	defaultValues = {},
-	validators,
+	validators = {},
 	onSubmit,
 }: FormOptions<T>) {
 	const formState = createFormState<T>();
@@ -102,7 +102,7 @@ export function createForm<T extends Record<string, any> = never>({
 			return;
 		}
 
-		onSubmit({ values: validatedValues as T });
+		onSubmit?.({ values: validatedValues as T });
 	};
 
 	return {
