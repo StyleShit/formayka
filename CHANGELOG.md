@@ -1,5 +1,11 @@
 # formayka
 
+## 0.0.3
+
+### Patch Changes
+
+- ffad95a: Remove react exports from the root package
+
 ## 0.0.2
 
 ### Patch Changes
