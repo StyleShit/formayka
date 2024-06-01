@@ -1,5 +1,12 @@
 # formayka
 
+## 0.0.2
+
+### Patch Changes
+
+- 06c45b3: Add tree-shaking support
+- 0759833: Improve dependencies management
+
 ## 0.0.1
 
 ### Patch Changes
