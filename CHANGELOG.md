@@ -1,5 +1,12 @@
 # formayka
 
+## 0.0.4
+
+### Patch Changes
+
+- 1113f64: Make `validators` & `onSubmit` optional
+- 27a2b87: Export `FormOptions` from `formayka/react`
+
 ## 0.0.3
 
 ### Patch Changes
