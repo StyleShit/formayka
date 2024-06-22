@@ -23,7 +23,7 @@ export function createForm<T extends Record<string, any> = never>({
 	validators = {},
 	onSubmit,
 }: FormOptions<T>) {
-	const formState = createFormState<T>();
+	const state = createFormState<T>();
 	const dependencies = createFormDependencies<T>();
 	const watchers = createFieldWatchers<T>();
 
@@ -51,7 +51,7 @@ export function createForm<T extends Record<string, any> = never>({
 
 			validated = validator(value as FieldValue, proxifiedValues);
 
-			formState.removeError(field);
+			state.removeError(field);
 		} catch (error: unknown) {
 			let message: string;
 
@@ -63,7 +63,7 @@ export function createForm<T extends Record<string, any> = never>({
 				message = 'Field is invalid';
 			}
 
-			formState.setError(field, message);
+			state.setError(field, message);
 		}
 
 		if (validated !== undefined) {
@@ -80,15 +80,15 @@ export function createForm<T extends Record<string, any> = never>({
 	const createListeners = (field: keyof T) => {
 		return {
 			onClick: () => {
-				formState.setTouched(field);
+				state.setTouched(field);
 			},
 
 			onFocus: () => {
-				formState.setTouched(field);
+				state.setTouched(field);
 			},
 
 			onChange: (value: unknown) => {
-				formState.setDirty(field);
+				state.setDirty(field);
 
 				rawValues[field] = value as T[keyof T];
 
@@ -106,7 +106,7 @@ export function createForm<T extends Record<string, any> = never>({
 			});
 		});
 
-		if (!formState.get().isValid) {
+		if (!state.get().isValid) {
 			return;
 		}
 
@@ -114,8 +114,8 @@ export function createForm<T extends Record<string, any> = never>({
 	};
 
 	return {
-		getState: formState.get,
-		subscribe: formState.subscribe,
+		getState: state.get,
+		subscribe: state.subscribe,
 		watch: watchers.watch,
 		getRawValue,
 		createListeners,
