@@ -1,5 +1,6 @@
 import { useForm } from '../src/react';
 import { form } from './form';
+import { Greeting } from './greeting';
 import { Submit } from './submit';
 
 function App() {
@@ -17,7 +18,7 @@ function App() {
 			<br />
 			Dirty: {Object.keys(formState.dirty).join(', ') || 'none'}
 			<br />
-			<br />
+			<Greeting />
 			<input type="text" placeholder="Name" {...textProps('name')} />
 			{formState.errors.name && <>{formState.errors.name}</>}
 			<br />
