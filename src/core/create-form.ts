@@ -1,5 +1,6 @@
 import { createFormDependencies } from './create-form-dependencies';
 import { createFormState } from './create-form-state';
+import { createFieldWatchers } from './create-field-watchers';
 
 type FieldValue = string | boolean;
 
@@ -24,6 +25,7 @@ export function createForm<T extends Record<string, any> = never>({
 }: FormOptions<T>) {
 	const formState = createFormState<T>();
 	const dependencies = createFormDependencies<T>();
+	const watchers = createFieldWatchers<T>();
 
 	const rawValues: Partial<Record<keyof T, FieldValue>> = defaultValues;
 	const validatedValues: Partial<T> = {};
@@ -91,6 +93,8 @@ export function createForm<T extends Record<string, any> = never>({
 				rawValues[field] = value as T[keyof T];
 
 				validate(field);
+
+				watchers.notify(field);
 			},
 		};
 	};
@@ -112,6 +116,7 @@ export function createForm<T extends Record<string, any> = never>({
 	return {
 		getState: formState.get,
 		subscribe: formState.subscribe,
+		watch: watchers.watch,
 		getRawValue,
 		createListeners,
 		submit,
