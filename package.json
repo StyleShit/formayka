@@ -40,7 +40,7 @@
 		"/src"
 	],
 	"scripts": {
-		"example": "vite",
+		"dev": "vite",
 		"test": "vitest --passWithNoTests",
 		"test:coverage": "vitest run --coverage --passWithNoTests",
 		"lint": "concurrently -n eslint,tsc -c magenta,green \"eslint ./\" \"tsc\"",
