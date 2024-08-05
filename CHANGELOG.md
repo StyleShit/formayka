@@ -1,5 +1,13 @@
 # formayka
 
+## 0.0.5
+
+### Patch Changes
+
+- be3d49d: [React] Change `useForm` API to accept a reference to the form instead of options
+- 30585a1: [React] Add `useWatch` API to listen for field changes
+- de053c0: [Core] Add `watch` API to listen for field changes
+
 ## 0.0.4
 
 ### Patch Changes
