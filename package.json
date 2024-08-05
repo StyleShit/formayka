@@ -36,8 +36,11 @@
 		"./package.json": "./package.json"
 	},
 	"files": [
+		"README.md",
+		"CHANGELOG.md",
 		"/dist",
-		"/src"
+		"/src",
+		"!**/__tests__"
 	],
 	"scripts": {
 		"dev": "vite",
