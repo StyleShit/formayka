@@ -68,6 +68,7 @@ export const form = createForm<{
 		},
 	},
 	onSubmit: ({ values }) => {
+		// eslint-disable-next-line no-console
 		console.log('Submit', values);
 	},
 });

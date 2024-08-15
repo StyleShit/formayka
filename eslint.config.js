@@ -18,17 +18,19 @@ export default tseslint.config(
 		},
 	},
 	{
-		rules: {
-			// We do some magics that requires `any`.
-			'@typescript-eslint/no-explicit-any': 'off',
-		},
-	},
-	{
 		ignores: [
 			'**/coverage/**',
 			'**/dist/**',
 			'**/node_modules/**',
 			'**/__snapshots__/**',
 		],
+	},
+	{
+		rules: {
+			'no-console': 'error',
+
+			// We do some magics that requires `any`.
+			'@typescript-eslint/no-explicit-any': 'off',
+		},
 	},
 );
